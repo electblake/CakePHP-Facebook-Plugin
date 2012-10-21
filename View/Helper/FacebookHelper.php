@@ -139,8 +139,10 @@ class FacebookHelper extends AppHelper {
 				'onclick' => $onclick));
 			}
 			else {
-				return $this->Html->link($options['label'], '#', array(
-					'onclick' => $onclick, 'id' => $options['id']));
+			  $linkOptions = $options;
+			  $linkOptions['onclick'] = $onclick;
+			  $linkOptions['id'] = $options['id'];
+				return $this->Html->link($options['label'], '#', $linkOptions);
 			}
 		}
 		else {
@@ -195,8 +197,10 @@ class FacebookHelper extends AppHelper {
 				'onclick' => $onclick));
 			}
 			else {
-				return $this->Html->link($options['label'], '#', array(
-					'onclick' => $onclick, 'id' => $options['id']));
+			  $linkOptions = $options;
+			  $linkOptions['onclick'] = $onclick;
+			  $linkOptions['id'] = $options['id'];
+				return $this->Html->link($options['label'], '#', $linkOptions);
 			}
 		} else {
 			$source = '/Facebook/img/facebook-logout.png';
