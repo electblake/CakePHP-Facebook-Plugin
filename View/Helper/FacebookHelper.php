@@ -41,6 +41,7 @@ class FacebookHelper extends AppHelper {
 		if(!$this->locale){
 			$this->locale = 'en_US';
 		}
+		$this->view = $View;
 		parent::__construct($View, $settings);
 	}
 	
@@ -70,6 +71,22 @@ class FacebookHelper extends AppHelper {
 	*/
 	public function html(){
 		return '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">';
+	}
+	
+	public function meta() {
+    // facebook meta
+    $output = array();
+    if (!empty($this->view->viewVars['facebook_meta'])) {
+  		foreach ($this->view->viewVars['facebook_meta'] as $key => $val) {
+  		  if (trim($val)) {
+      		$output[] = $this->Html->meta(array('name' => 'og:'.$key, 'content' => $val)); 
+  		  }
+  		}
+  		
+  		$output[] = $this->Html->meta(array('name' => 'fb:app_id', 'content' => FacebookInfo::getConfig('appId')));
+		}
+		return implode("\n", $output);
+  	
 	}
 	
 	/**
